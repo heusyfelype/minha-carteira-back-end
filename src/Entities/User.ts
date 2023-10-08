@@ -7,3 +7,8 @@ export interface User {
 export interface UserSignup extends User {
   confirmPassword: string;
 }
+
+export interface UserSignin {
+  email: string;
+  password: string;
+}

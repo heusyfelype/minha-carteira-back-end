@@ -10,6 +10,6 @@ mongoClient.connect();
 
 const db = mongoClient.db(process.env.DATABASE_PATH);
 
-console.log("Database Connected Succesfuly! \nUsing " + db.namespace + "\n");
+console.log("Database Connected Successfully! \nUsing " + db.namespace + "\n");
 
 export default db;

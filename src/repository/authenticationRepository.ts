@@ -1,11 +1,12 @@
-import { User } from "../Entities/User";
-import db from "../config/dbConfig";
-export async function gettUserByEmail(email: string) {
-  const user = await db.collection("users").find({ email });
-  console.log("User: ", user)
+import { WithId } from "mongodb";
+import { User, UserSignup } from "../Entities/User";
+import db from "../config/dbConfig.js";
+
+export async function getUserByEmail(email: string): Promise< WithId<User> | null>{
+  const user = await db.collection<User>("users").findOne({ email });
   return user;
 }
 
-export async function createUser(user: Omit<User, "confirmPassword">) {
+export async function createUser(user: User) {
   await db.collection("users").insertOne({ ...user });
 }
