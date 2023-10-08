@@ -8,7 +8,6 @@ import { cashIn, cashOut, getBalance } from "../controller/transactionsControlle
 const transactionsRouter = Router();
 
 transactionsRouter.get("/transactions", validToken, getBalance)
-// transactionsRouter.get("/transactions/:{id}")
 transactionsRouter.post("/transactions/cash-in", validToken, validSchemaMiddleware(transactionSchema), cashIn);
 transactionsRouter.post("/transactions/cash-out", validToken, validSchemaMiddleware(transactionSchema), cashOut);
 

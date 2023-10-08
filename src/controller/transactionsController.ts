@@ -6,13 +6,11 @@ import {
 } from "../service/transactionService.js";
 
 export async function cashIn(req: Request, res: Response) {
-  //console.log("REQ BODR: ", req.body, "res.locals.userData.data: ", res.locals.userData.data)
   const { userId } = res.locals.userData.data;
   const transaction: Transaction = req.body;
   transaction.type = TransactionType.input;
   transaction.userId = userId;
 
-  //console.log("\n\n transaction: ", transaction)
   await insertTransactionService(transaction);
   res.sendStatus(201);
 }
@@ -30,5 +28,5 @@ export async function getBalance(req: Request, res: Response) {
   const { userId } = res.locals.userData.data;
   const balance = await getBalanceService(userId);
 
-  return balance;
+  return res.send({balance});
 }

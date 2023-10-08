@@ -40,7 +40,7 @@ export async function signinUserService(user: UserSignin): Promise<string> {
   const expireConfig = { expiresIn: +process.env.EXPIRES_JWT_TOKEN };
 
   return jwt.sign(
-    { data: { userId: hasUser._id } },
+    { data: { userId: hasUser._id, username: hasUser.username } },
     process.env.JWT_SECRET,
     expireConfig
   );
