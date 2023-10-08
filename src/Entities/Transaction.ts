@@ -1,5 +1,7 @@
+import { ObjectId } from "mongodb";
+
 export interface Transaction {
-  userId: string;
+  userId: ObjectId;
   value: number;
   createdAt: Date;
   type: TransactionType;

@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { UserSignin, UserSignup } from "../Entities/User.js";
 import {
-  signiupUserService,
+  signupUserService,
   signinUserService,
 } from "../service/authenticationService.js";
 
 export async function signup(req: Request, res: Response) {
   const user: UserSignup = req.body;
-  await signiupUserService(user);
+  await signupUserService(user);
   res.sendStatus(201);
 }
 

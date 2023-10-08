@@ -1,20 +1,27 @@
 import { Request, Response } from "express";
 import { Transaction, TransactionType } from "../Entities/Transaction.js";
-import { getBalanceService, insertTransactionService } from "../service/transactionService.js";
+import {
+  getBalanceService,
+  insertTransactionService,
+} from "../service/transactionService.js";
 
 export async function cashIn(req: Request, res: Response) {
-  const { data } = res.locals.userData;
+  //console.log("REQ BODR: ", req.body, "res.locals.userData.data: ", res.locals.userData.data)
+  const { userId } = res.locals.userData.data;
   const transaction: Transaction = req.body;
   transaction.type = TransactionType.input;
+  transaction.userId = userId;
+
+  //console.log("\n\n transaction: ", transaction)
   await insertTransactionService(transaction);
   res.sendStatus(201);
 }
 
 export async function cashOut(req: Request, res: Response) {
-  const { data } = res.locals.userData;
+  const { userId } = res.locals.userData.data;
   const transaction: Transaction = req.body;
   transaction.type = TransactionType.output;
-  transaction.userId = data.userId;
+  transaction.userId = userId;
   await insertTransactionService(transaction);
   res.sendStatus(201);
 }
