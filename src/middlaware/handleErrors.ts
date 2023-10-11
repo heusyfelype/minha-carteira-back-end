@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { TokenExpiredError } from "jsonwebtoken";
 import { MongoInvalidArgumentError } from "mongodb";
 
 const typeErrors = {
@@ -19,6 +20,8 @@ export function handleError(
 
   if (typeof error === typeof MongoInvalidArgumentError)
     console.log("Erro no banco de dados: ", error);
+  if (typeof error === "string" && error.includes("jwt expired"))
+    res.status(400).send(false);
   else console.log("Erro não tratado: ", error);
 
   return res.sendStatus(500);

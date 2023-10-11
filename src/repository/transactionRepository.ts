@@ -28,3 +28,12 @@ export async function updateBalance(balance: Balance) {
 export async function createBalance(balance: Balance) {
   await db.collection("balance").insertOne(balance);
 }
+
+export async function getTransactionsListByUserId(
+  userId: ObjectId
+): Promise<WithId<Transaction>[]> {
+  return db
+    .collection<Transaction>("transactions")
+    .find({ userId: userId })
+    .toArray();
+}

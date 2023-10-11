@@ -3,6 +3,7 @@ import { UserSignin, UserSignup } from "../Entities/User"
 import { Transaction } from "../Entities/Transaction"
 
 export const transactionSchema = Joi.object<Transaction>({
-    value: Joi.number().integer().min(1).required()
+    value: Joi.number().integer().min(1).required(),
+    description: Joi.string().max(300).optional()
 })
 

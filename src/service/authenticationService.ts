@@ -30,6 +30,7 @@ export async function signupUserService(user: UserSignup) {
 
 export async function signinUserService(user: UserSignin): Promise<string> {
   const hasUser = await getUserByEmail(user.email);
+  console.log("has user: ", hasUser)
   if (
     !hasUser ||
     !comparehashedWithNoHashedPassword(user.password, hasUser.password)
